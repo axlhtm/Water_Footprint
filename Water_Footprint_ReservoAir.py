@@ -57,7 +57,7 @@ def wf_p_home():
 
             """
         )
-        st.image("C:/Users/axelh/OneDrive/Documents/Hydroinformatics/ReservoAir/Logo/ReservoAir-Logo.png", width=125)
+        st.image("https://reservoair.com/wp-content/uploads/2023/06/logo-HD-RESERVO-AIR-1.png", width=125)
 
     with cols[1]:
         st.image("C:/Users/axelh/Downloads/An Indian Child in a Pool.jpg", width=650)
