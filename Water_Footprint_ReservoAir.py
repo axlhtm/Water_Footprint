@@ -2,14 +2,22 @@
 # WATER FOOTPRINT FOR PERSONAL USE - HOME
 # =============================================================================
 # Import Python Libraries
+from faker import Faker
 from urllib.error import URLError
 import altair as alt
 import datetime
+import geopy.geocoders
 import numpy as np
 import pandas as pd
 import pydeck as pdk
 import streamlit as st
 import sqlalchemy as sa
+
+DB_USERNAME = "u106038152_reservoair"
+DB_TOKEN = "Delft211295"
+DB_HOST = "154.41.240.52"
+DB_PORT = 3306
+DB_NAME = "u106038152_reservoair"
 
 # =============================================================================
 # WATER FOOTPRINT FOR PERSONAL USE - HOME PAGE
@@ -64,7 +72,7 @@ def wf_p_calculator():
     # PRE-SECTION: INITIALIZE CONNECTION TO SQL
     # =============================================================================
     # 0.1. Database Connection Details
-    engine = sa.create_engine('mysql+pymysql://u106038152_reservoair:Delft211295@154.41.240.52:3306/u106038152_reservoair')
+    engine = sa.create_engine(f"mysql+pymysql://{DB_USERNAME}:{DB_TOKEN}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
     # 0.2. Define Table Schema
     table_name = 'wf_p_calculator_raw_data'
     schema = {
@@ -285,7 +293,7 @@ def wf_p_calculator():
                 email_sliced = st.text_input("Already filled the data?", placeholder="Enter your email address", label_visibility="collapsed")
                 def df_wf_p_pros_sliced(): 
                     global sliced_df_wf_p_pros, sliced_wf_hyg, sliced_wf_food, sliced_wf_dom, sliced_wf_total, max_wf_value, max_wf_consumption_source, sliced_wf_name, df_wf_p_pros, df_wf_p_pros_avg_dom, df_wf_p_pros_avg_food, df_wf_p_pros_avg_hyg, df_wf_p_pros_avg_total
-                    engine_pros      = sa.create_engine('mysql+pymysql://u106038152_reservoair:Delft211295@154.41.240.52:3306/u106038152_reservoair')
+                    engine_pros      =  sa.create_engine(f"mysql+pymysql://{DB_USERNAME}:{DB_TOKEN}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
                     table_name_pros  = 'wf_p_calculator_pros_data'
                     # I.2. Define the SQL Query to Retrieve Data
                     query_pros       = f"SELECT * FROM {table_name_pros}"
@@ -376,7 +384,7 @@ def wf_p_calculator():
             # SECTION I. Import Dataframe from MySQL Database
             # =============================================================================
             # I.1. Database Connection Details
-            engine_pros      = sa.create_engine('mysql+pymysql://u106038152_reservoair:Delft211295@154.41.240.52:3306/u106038152_reservoair')
+            engine_pros      = sa.create_engine(f"mysql+pymysql://{DB_USERNAME}:{DB_TOKEN}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
             table_name_pros  = 'wf_p_calculator_raw_data'
             # I.2. Define the SQL Query to Retrieve Data
             query_pros       = f"SELECT * FROM {table_name_pros}"
@@ -502,7 +510,7 @@ def wf_p_calculator():
             # PRE-SECTION: INITIALIZE CONNECTION TO SQL
             # =============================================================================
             # 0.1. Database Connection Details
-            engine = sa.create_engine('mysql+pymysql://u106038152_reservoair:Delft211295@154.41.240.52:3306/u106038152_reservoair')
+            engine = sa.create_engine(f"mysql+pymysql://{DB_USERNAME}:{DB_TOKEN}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
             # 0.2. Define Table Schema
             table_name = 'wf_p_calculator_pros_data'
             schema = {
@@ -538,7 +546,7 @@ def wf_p_model():
         # SECTION I. Import Dataframe from MySQL Database
         # =============================================================================
         # I.1. Database Connection Details
-        engine = sa.create_engine('mysql+pymysql://u106038152_reservoair:Delft211295@154.41.240.52:3306/u106038152_reservoair')
+        engine = sa.create_engine(f"mysql+pymysql://{DB_USERNAME}:{DB_TOKEN}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
         table_name = 'wf_p_calculator_pros_data'
         # I.2. Define the SQL query to retrieve data
         query = f"SELECT * FROM {table_name}"  # Selects all columns from user_data table
@@ -640,7 +648,7 @@ def wf_p_overview():
         # SECTION I. Import Dataframe from MySQL Database
         # =============================================================================
         # I.1. Database Connection Details
-        engine = sa.create_engine('mysql+pymysql://u106038152_reservoair:Delft211295@154.41.240.52:3306/u106038152_reservoair')
+        engine = sa.create_engine(f"mysql+pymysql://{DB_USERNAME}:{DB_TOKEN}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
         table_name = 'wf_p_calculator_pros_data'
         # I.2. Define the SQL query to retrieve data
         query = f"SELECT * FROM {table_name}"  # Selects all columns from user_data table
