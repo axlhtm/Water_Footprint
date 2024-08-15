@@ -2,7 +2,6 @@
 # WATER FOOTPRINT FOR PERSONAL USE - HOME
 # =============================================================================
 # Import Python Libraries
-from faker import Faker
 from urllib.error import URLError
 import altair as alt
 import datetime
